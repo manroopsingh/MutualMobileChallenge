@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MutualMobileChallenge</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="sources">Sources</string>
+    <string name="search_hint">Search food</string>
+</resources>
