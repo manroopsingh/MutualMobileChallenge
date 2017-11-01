@@ -146,4 +146,11 @@ public class RecipeList extends AppCompatActivity implements RecipeListContact.V
 
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+        RecipeApplication.get(this).clearRecipeListComponent();
+    }
 }

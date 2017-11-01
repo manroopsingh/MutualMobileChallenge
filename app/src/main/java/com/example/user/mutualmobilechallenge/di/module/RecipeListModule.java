@@ -15,8 +15,9 @@ import dagger.Provides;
 @Module
 public class RecipeListModule {
 
+//    Only have the presenter here since this is the only dependency we are passing in the
+//    RecipeDetail activity
     @ActivityScope
-    @Provides
     RecipeListPresenter provideRecipeListPresenter(RemoteDataSource remoteDataSource){
         return new RecipeListPresenter(remoteDataSource);
     }

@@ -100,4 +100,11 @@ public class RecipeDetail extends AppCompatActivity implements RecipeDetailContr
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.detachView();
+        RecipeApplication.get(this).clearRecipeDetailComponent();
+
+    }
 }

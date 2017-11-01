@@ -1,5 +1,6 @@
 package com.example.user.mutualmobilechallenge.di.component;
 
+import com.example.user.mutualmobilechallenge.data.local.DatabaseHelper;
 import com.example.user.mutualmobilechallenge.data.remote.RemoteDataSource;
 import com.example.user.mutualmobilechallenge.di.module.AppModule;
 import com.example.user.mutualmobilechallenge.di.module.RecipeDetailModule;
@@ -21,6 +22,6 @@ public interface AppComponent {
     RecipeListComponent plus(RecipeListModule recipeListModule);
 
     RecipeDetailComponent plus(RecipeDetailModule recipeDetailModule);
-//    RemoteDataSource remoteSource();
+
 
 }
