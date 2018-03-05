@@ -10,12 +10,14 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.example.user.mutualmobilechallenge.R;
 import com.example.user.mutualmobilechallenge.RecipeApplication;
 import com.example.user.mutualmobilechallenge.model.Recipe;
+import com.example.user.mutualmobilechallenge.utils.TagManager;
 import com.example.user.mutualmobilechallenge.view.recipedetail.RecipeDetail;
 
 import java.util.ArrayList;
@@ -25,7 +27,6 @@ import javax.inject.Inject;
 
 public class RecipeList extends AppCompatActivity implements RecipeListContact.View, RecipeListAdapter.RecipeListItemListener {
 
-    private static final String TAG = "MainActivityTag";
 
     private List<Recipe> recipeList = new ArrayList<>();
 
@@ -42,8 +43,6 @@ public class RecipeList extends AppCompatActivity implements RecipeListContact.V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         setupDaggerComponent();
         presenter.attachView(this);
@@ -72,7 +71,10 @@ public class RecipeList extends AppCompatActivity implements RecipeListContact.V
         super.onNewIntent(intent);
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             query = intent.getStringExtra(SearchManager.QUERY);
+
             recipeList.clear();
+            scrollListener.resetState();
+            Log.d(TagManager.get(this), "onNewIntent: ");
             presenter.getRecipes(0, query);
         }
 
@@ -120,13 +122,11 @@ public class RecipeList extends AppCompatActivity implements RecipeListContact.V
         this.recipeList.addAll(recipeList1);
         adapter.notifyDataSetChanged();
 
-
     }
 
     @Override
     public void showProgress(int MODE) {
         if(MODE == RecipeListPresenter.INIT_ITEMS){
-
             progress = new ProgressDialog(this);
             progress.setTitle("Loading");
             progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
@@ -143,7 +143,6 @@ public class RecipeList extends AppCompatActivity implements RecipeListContact.V
         Intent intent = new Intent(this, RecipeDetail.class);
         intent.putExtra("recipe", recipe);
         startActivity(intent);
-
 
     }
 

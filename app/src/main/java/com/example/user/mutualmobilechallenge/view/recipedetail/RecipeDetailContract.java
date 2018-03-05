@@ -1,8 +1,8 @@
 package com.example.user.mutualmobilechallenge.view.recipedetail;
 
 import com.example.user.mutualmobilechallenge.model.Recipe;
-import com.example.user.mutualmobilechallenge.utils.BasePresenter;
-import com.example.user.mutualmobilechallenge.utils.BaseView;
+import com.example.user.mutualmobilechallenge.utils.base.BasePresenter;
+import com.example.user.mutualmobilechallenge.utils.base.BaseView;
 
 /**
  * Created by user on 10/26/17.

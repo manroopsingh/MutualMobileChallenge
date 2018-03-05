@@ -1,8 +1,8 @@
 package com.example.user.mutualmobilechallenge.view.recipelist;
 
 import com.example.user.mutualmobilechallenge.model.Recipe;
-import com.example.user.mutualmobilechallenge.utils.BasePresenter;
-import com.example.user.mutualmobilechallenge.utils.BaseView;
+import com.example.user.mutualmobilechallenge.utils.base.BasePresenter;
+import com.example.user.mutualmobilechallenge.utils.base.BaseView;
 
 import java.util.List;
 
@@ -20,7 +20,6 @@ public interface RecipeListContact {
 
     interface Presenter extends BasePresenter<View>{
         void getRecipes(int page, String query);
-
 
     }
 }

@@ -1,4 +1,4 @@
-package com.example.user.mutualmobilechallenge.utils;
+package com.example.user.mutualmobilechallenge.utils.base;
 
 /**
  * Created by user on 10/25/17.

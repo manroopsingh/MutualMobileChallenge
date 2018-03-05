@@ -32,6 +32,7 @@ public class RecipeDetailPresenter implements RecipeDetailContract.Presenter {
         view.setSources(recipe.getSource(),recipe.getUrl());
 
 
+
     }
 
     public String formattedIngredients(List<String> ingredientLines) {

@@ -6,6 +6,7 @@ import com.example.user.mutualmobilechallenge.data.remote.RemoteDataSource;
 import com.example.user.mutualmobilechallenge.model.HitsItem;
 import com.example.user.mutualmobilechallenge.model.Recipe;
 import com.example.user.mutualmobilechallenge.model.Response;
+import com.example.user.mutualmobilechallenge.utils.TagManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +28,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class RecipeListPresenter implements RecipeListContact.Presenter {
 
-    public static final int INIT_ITEMS = 0;
+    static final int INIT_ITEMS = 0;
 
-    RemoteDataSource remoteDataSource;
+    private RemoteDataSource remoteDataSource;
+    private RecipeListContact.View view;
+    private List<Recipe> recipeList = new ArrayList<>();
 
     @Inject
     public RecipeListPresenter(RemoteDataSource remoteDataSource) {
         this.remoteDataSource = remoteDataSource;
-    }
 
-    RecipeListContact.View view;
-    List<Recipe> recipeList = new ArrayList<>();
-    public static final String TAG = "RecipeListPresenter";
+    }
 
     @Override
     public void attachView(RecipeListContact.View view) {
@@ -54,6 +54,8 @@ public class RecipeListPresenter implements RecipeListContact.Presenter {
     @Override
     public void getRecipes(int fromItemNumber, String query) {
 
+        Log.d(TagManager.get(this), "getRecipes: " + fromItemNumber + ":" + query);
+
         if (fromItemNumber == INIT_ITEMS)
             view.showProgress(INIT_ITEMS);
         else
@@ -64,7 +66,7 @@ public class RecipeListPresenter implements RecipeListContact.Presenter {
             @Override
             public void onSubscribe(Disposable d) {
 
-                Log.d(TAG, "onSubscribe: ");
+                Log.d(TagManager.get(this), "onSubscribe: ");
             }
 
             @Override
@@ -89,26 +91,31 @@ public class RecipeListPresenter implements RecipeListContact.Presenter {
         remoteDataSource.getResponse(query, from, to)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .flatMap(new Function<Response, Observable<Recipe>>() {
-                    @Override
-                    public Observable<Recipe> apply(final Response response) throws Exception {
-
-                        return Observable.create(new ObservableOnSubscribe<Recipe>() {
-                            @Override
-                            public void subscribe(ObservableEmitter<Recipe> e) throws Exception {
-
-                                for (HitsItem hitsItem : response.getHits()) {
-                                    e.onNext(hitsItem.getRecipe());
-                                }
-                                e.onComplete();
-
-
-                            }
-                        });
-                    }
-                })
+                .flatMap(getFlatMapFunction())
                 .subscribe(observer);
 
 
     }
+
+    private Function<Response, Observable<Recipe>> getFlatMapFunction() {
+        return new Function<Response, Observable<Recipe>>() {
+            @Override
+            public Observable<Recipe> apply(final Response response) throws Exception {
+
+                return Observable.create(new ObservableOnSubscribe<Recipe>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Recipe> e) throws Exception {
+
+                        for (HitsItem hitsItem : response.getHits()) {
+                            e.onNext(hitsItem.getRecipe());
+                        }
+                        e.onComplete();
+
+
+                    }
+                });
+            }
+        };
+    }
+
 }

@@ -46,13 +46,11 @@ public class RemoteDataSource {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
-        //create a client for the adding the interceptor
+        //get a client for the adding the interceptor
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(logging)
                 .cache(cache)
                 .build();
-
-
 
 
         Retrofit retrofit = new Retrofit.Builder()
