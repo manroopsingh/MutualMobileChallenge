@@ -5,4 +5,8 @@ package com.example.user.mylibrary;
  */
 
 public class SampleClass {
+
+    public static String getSampleString() {
+        return "Sample String";
+    }
 }

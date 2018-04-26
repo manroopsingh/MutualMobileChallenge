@@ -7,6 +7,7 @@ import com.example.user.mutualmobilechallenge.model.HitsItem;
 import com.example.user.mutualmobilechallenge.model.Recipe;
 import com.example.user.mutualmobilechallenge.model.Response;
 import com.example.user.mutualmobilechallenge.utils.TagManager;
+import com.example.user.mylibrary.SampleClass;
 
 import java.util.ArrayList;
 import java.util.List;

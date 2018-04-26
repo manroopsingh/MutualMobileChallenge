@@ -25,7 +25,7 @@ import java.util.List;
 public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.ViewHolder> {
 
     private Context context;
-    private List<Recipe> recipeList = new ArrayList<>();
+    private List<Recipe> recipeList;
     private RecipeListItemListener listener;
 
     public RecipeListAdapter(Context context, List<Recipe> recipeList) {
@@ -45,7 +45,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         Recipe recipe = recipeList.get(position);
-        Picasso.with(context).load(recipe.getImage()).into(holder.recipeImage);
+        Picasso.get().load(recipe.getImage()).into(holder.recipeImage);
 
     }
 

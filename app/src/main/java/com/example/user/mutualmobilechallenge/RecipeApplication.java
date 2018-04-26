@@ -27,7 +27,6 @@ public class RecipeApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-
         AppModule appModule = new AppModule(BASEURL, getApplicationContext());
         appComponent = DaggerAppComponent.builder()
                 .appModule(appModule)

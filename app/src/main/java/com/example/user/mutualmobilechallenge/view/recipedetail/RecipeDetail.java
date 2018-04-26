@@ -72,7 +72,7 @@ public class RecipeDetail extends AppCompatActivity implements RecipeDetailContr
 
     @Override
     public void setToolbar(String image, String label) {
-        Picasso.with(this).load(image).into(ivRecipeImage);
+        Picasso.get().load(image).into(ivRecipeImage);
         tvRecipeLabel.setText(label);
     }
 
